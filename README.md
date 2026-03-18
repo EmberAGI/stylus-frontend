@@ -109,8 +109,8 @@ Required GitHub repository secrets:
 - `VITE_MCP_REMOTE_BASE_URL`
 - `VITE_SKILLS_API_BASE_URL`
 - `VITE_OPENROUTER_PROXY_URL`
-- `VITE_LLM_MODEL` (optional)
-- `VITE_LLM_FALLBACK_MODEL` (optional)
+- `VITE_LLM_MODEL` (optional, defaults to `openai/gpt-4o-mini`; unavailable models are remapped to a supported default at runtime)
+- `VITE_LLM_FALLBACK_MODEL` (optional, defaults to `openai/gpt-4o-mini`)
 - `VITE_SKILLS_INSTALLER_PACKAGE` (optional)
 - `VITE_SKILLS_INSTALL_REPO` (optional)
 - `VITE_PROJECT_GITHUB_URL` (optional)

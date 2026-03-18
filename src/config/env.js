@@ -4,12 +4,16 @@ const DEFAULTS = Object.freeze({
   mcpRemoteBaseUrl: 'https://sifter.azule.xyz',
   skillsApiBaseUrl: '',
   openRouterProxyUrl: '/openrouter/chat/completions',
-  model: 'google/gemini-2.0-flash-exp',
+  model: 'openai/gpt-4o-mini',
   fallbackModel: 'openai/gpt-4o-mini',
   skillsInstallerPackage: 'sift-stylus',
   skillsInstallRepo: 'getFairAI/angel-stylus-coding-assistant',
   projectGithubUrl: 'https://github.com/placeholder',
   projectXUrl: 'https://x.com/getFairAI',
+});
+
+const UNAVAILABLE_MODEL_REMAP = Object.freeze({
+  'google/gemini-2.0-flash-exp': DEFAULTS.model,
 });
 
 const normalizeMcpTarget = (value) => (String(value || '').trim().toLowerCase() === 'remote' ? 'remote' : 'local');
@@ -28,14 +32,27 @@ const resolvedSkillsApiBaseUrl =
   (mcpTarget === 'remote' ? mcpRemoteBaseUrl : mcpLocalBaseUrl) ||
   DEFAULTS.skillsApiBaseUrl;
 
+const normalizeModel = (value, fallback) => {
+  const normalized = String(value || '').trim();
+
+  if (!normalized) {
+    return fallback;
+  }
+
+  return UNAVAILABLE_MODEL_REMAP[normalized] || normalized;
+};
+
+const model = normalizeModel(import.meta.env.VITE_LLM_MODEL, DEFAULTS.model);
+const fallbackModel = normalizeModel(import.meta.env.VITE_LLM_FALLBACK_MODEL, DEFAULTS.fallbackModel);
+
 export const appEnv = Object.freeze({
   mcpTarget,
   mcpLocalBaseUrl,
   mcpRemoteBaseUrl,
   skillsApiBaseUrl: resolvedSkillsApiBaseUrl,
   openRouterProxyUrl: remapLegacyApiHost(import.meta.env.VITE_OPENROUTER_PROXY_URL || DEFAULTS.openRouterProxyUrl),
-  model: import.meta.env.VITE_LLM_MODEL || DEFAULTS.model,
-  fallbackModel: import.meta.env.VITE_LLM_FALLBACK_MODEL || DEFAULTS.fallbackModel,
+  model,
+  fallbackModel,
   skillsInstallerPackage:
     import.meta.env.VITE_SKILLS_INSTALLER_PACKAGE || DEFAULTS.skillsInstallerPackage,
   skillsInstallRepo: import.meta.env.VITE_SKILLS_INSTALL_REPO || DEFAULTS.skillsInstallRepo,
