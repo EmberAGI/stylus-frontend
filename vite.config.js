@@ -14,7 +14,15 @@ export default defineConfig(({ mode }) => {
           target: proxyTarget,
           changeOrigin: true,
         },
+        '/platform-feedback': {
+          target: proxyTarget,
+          changeOrigin: true,
+        },
         '/admin/logs/': {
+          target: proxyTarget,
+          changeOrigin: true
+        },
+        '/admin/platform-feedback': {
           target: proxyTarget,
           changeOrigin: true
         },

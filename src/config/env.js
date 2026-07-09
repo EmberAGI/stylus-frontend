@@ -8,8 +8,9 @@ const DEFAULTS = Object.freeze({
   fallbackModel: 'openai/gpt-4o-mini',
   skillsInstallerPackage: 'sift-stylus',
   skillsInstallRepo: 'getFairAI/angel-stylus-coding-assistant',
-  projectGithubUrl: 'https://github.com/placeholder',
+  projectGithubUrl: 'https://github.com/getFairAI/angel-stylus-coding-assistant',
   projectXUrl: 'https://x.com/getFairAI',
+  feedbackEndpoint: '/platform-feedback',
 });
 
 const UNAVAILABLE_MODEL_REMAP = Object.freeze({
@@ -58,4 +59,5 @@ export const appEnv = Object.freeze({
   skillsInstallRepo: import.meta.env.VITE_SKILLS_INSTALL_REPO || DEFAULTS.skillsInstallRepo,
   projectGithubUrl: import.meta.env.VITE_PROJECT_GITHUB_URL || DEFAULTS.projectGithubUrl,
   projectXUrl: import.meta.env.VITE_PROJECT_X_URL || DEFAULTS.projectXUrl,
+  feedbackEndpoint: import.meta.env.VITE_FEEDBACK_ENDPOINT || DEFAULTS.feedbackEndpoint,
 });
