@@ -10,11 +10,11 @@ const DEFAULTS = Object.freeze({
   skillsInstallRepo: 'getFairAI/angel-stylus-coding-assistant',
   projectGithubUrl: 'https://github.com/getFairAI/angel-stylus-coding-assistant',
   projectXUrl: 'https://x.com/getFairAI',
+  feedbackEndpoint: '/platform-feedback',
 });
 
 const UNAVAILABLE_MODEL_REMAP = Object.freeze({
   'google/gemini-2.0-flash-exp': DEFAULTS.model,
-  feedbackEndpoint: 'https://api.siftstylus.xyz/user-feedback',
 });
 
 const normalizeMcpTarget = (value) => (String(value || '').trim().toLowerCase() === 'remote' ? 'remote' : 'local');
